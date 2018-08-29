@@ -1,7 +1,7 @@
 {
   "name": "express-imagemin-proxy",
-  "version": "0.1.0",
-  "description": "An express middleware to serve optimized images, with resizing and converting",
+  "version": "0.2.0",
+  "description": "An express middleware to optimize images from a backend, with resizing and converting",
   "main": "src/index.js",
   "keywords": [
     "express",
@@ -10,7 +10,9 @@
     "image",
     "minification",
     "imagemagick",
-    "graphicsmagick"
+    "graphicsmagick",
+    "resize",
+    "convert"
   ],
   "repository": "https://github.com/tprobinson/express-imagemin-proxy.git",
   "bugs": {
