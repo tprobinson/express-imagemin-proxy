@@ -108,3 +108,17 @@ Currently supported parameters:
 * `gravity`: when resizing the image, what side of the image should be prioritized?
 
 See [imagemin-gm](https://www.npmjs.com/package/imagemin-gm) for more information.
+
+# Known Issues / TODO
+
+- [ ] other GM functions?
+
+# Development
+
+Please use the included ESlint configuration to enforce style when developing. Use `yarn test` to run the linter and test suite before commits.
+
+To generate documentation, use `yarn doc` or `yarn docdev`.
+
+# License
+
+[MIT](https://www.tldrlegal.com/l/mit)
