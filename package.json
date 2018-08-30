@@ -25,7 +25,7 @@
     "url": "https://keybase.io/tpr"
   },
   "scripts": {
-    "lint": "eslint src/ test/",
+    "lint": "eslint src/ test/ __mocks__/",
     "test": "yarn run lint; jest --maxWorkers=4",
     "test:coveralls": "yarn run test --coverage --coverageReporters=text-lcov | yarn exec coveralls",
     "doc": "esdoc",

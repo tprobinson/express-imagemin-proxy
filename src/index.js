@@ -31,12 +31,12 @@ class ImageminProxy {
 				// Use the query parameters to initialize some image resizing plugins
 				const prependPlugins = []
 
-				if( 'width' in req.query || 'height' in req.query || 'gravity' in req.query ) {
-					const config = {}
-					if( 'width' in req.query && req.query.width ) { config.width = req.query.width }
-					if( 'height' in req.query && req.query.height ) { config.height = req.query.height }
-					if( 'gravity' in req.query && req.query.gravity ) { config.gravity = req.query.gravity }
-					prependPlugins.push(imageminGm.resize(config))
+				const resizeConfig = {}
+				if( 'width' in req.query && req.query.width ) { resizeConfig.width = req.query.width }
+				if( 'height' in req.query && req.query.height ) { resizeConfig.height = req.query.height }
+				if( 'gravity' in req.query && req.query.gravity ) { resizeConfig.gravity = req.query.gravity }
+				if( Object.keys(resizeConfig).length > 0 ) {
+					prependPlugins.push(imageminGm.resize(resizeConfig))
 				}
 
 				if( 'format' in req.query && req.query.format ) {

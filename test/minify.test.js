@@ -65,4 +65,20 @@ describe('minify images', () => {
 				})
 		})
 	})
+
+	test('get minified png with content-type preset', done => {
+		utils.createTestEnvironment(utils.serveBufferWithContentType(images.smallPng, 'image/png'), {
+			plugins: utils.imageminPlugins,
+		}, (err, env) => {
+			if( err ) { return done(err) }
+
+			utils.getAsBinary(env.app)
+				.then(response => {
+					expect(response.statusCode).toBe(200)
+					expect(response.body.length).toBeLessThan(images.smallPng.length)
+					env.listen.close()
+					done()
+				})
+		})
+	})
 })

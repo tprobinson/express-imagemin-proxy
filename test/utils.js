@@ -14,6 +14,12 @@ const binaryParser = (res, callback) => {
 }
 
 const serveBuffer = whichBuffer => () => Promise.resolve(whichBuffer)
+const serveBufferWithContentType =
+	(whichBuffer, contentType) =>
+		(req, res) => {
+			res.contentType(contentType)
+			return Promise.resolve(whichBuffer)
+		}
 
 const imageminPngQuant = require('imagemin-pngquant')
 const imageminJpegOptim = require('imagemin-jpegoptim')
@@ -107,10 +113,13 @@ const imageminPlugins = [
 module.exports = {
 	binaryParser,
 	serveBuffer,
+	serveBufferWithContentType,
 	imageminPlugins,
 
 	get: app => request(app).get('/'),
+	getPath: (app, path) => request(app).get(path),
 	getAsBinary: app => request(app).get('/').buffer().parse(binaryParser),
+	getPathAsBinary: (app, path) => request(app).get(path).buffer().parse(binaryParser),
 	createTestEnvironment: (backend, options, cb) => {
 		const proxyMiddleware = new ImageminProxy(backend, options)
 
