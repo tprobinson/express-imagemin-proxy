@@ -2,6 +2,14 @@
 
 An Express middleware to serve up minified images retrieved from a backend.
 
+[![https://nodei.co/npm/express-imagemin-proxy.svg?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/express-imagemin-proxy.svg?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/express-imagemin-proxy)
+
+[![Dependency Status](https://david-dm.org/tprobinson/express-imagemin-proxy.svg)](https://david-dm.org)
+[![Coverage Status](https://coveralls.io/repos/github/tprobinson/express-imagemin-proxy/badge.svg?branch=master)](https://coveralls.io/github/tprobinson/express-imagemin-proxy?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/tprobinson/express-imagemin-proxy/badge.svg?targetFile=package.json)](https://snyk.io/test/github/tprobinson/express-imagemin-proxy?targetFile=package.json)
+
+master: [![Build Status](https://travis-ci.org/tprobinson/express-imagemin-proxy.svg?branch=master)](https://travis-ci.org/tprobinson/express-imagemin-proxy)
+[![Inline docs](http://inch-ci.org/github/tprobinson/express-imagemin-proxy.svg?branch=master)](http://inch-ci.org/github/tprobinson/express-imagemin-proxy)
 
 
 # Prerequisites
@@ -115,7 +123,7 @@ See [imagemin-gm](https://www.npmjs.com/package/imagemin-gm) for more informatio
 
 # Development
 
-Please use the included ESlint configuration to enforce style when developing. Use `yarn test` to run the linter and test suite before commits.
+Please use the included ESlint configuration to enforce style when developing. Use `yarn test --coverage` to run the linter and test suite as well as coverage before commits.
 
 To generate documentation, use `yarn doc` or `yarn docdev`.
 
