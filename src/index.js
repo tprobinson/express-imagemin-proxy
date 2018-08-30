@@ -9,7 +9,22 @@ const defaultOptions = {
 	guessFormat: true,
 }
 
+/**
+	* @external {ExpressRequest} https://expressjs.com/en/api.html#req
+	*/
+
+/**
+  * @external {ExpressResponse} https://expressjs.com/en/api.html#res
+  */
+
 class ImageminProxy {
+	/**
+	 * Initializes and returns an Express route.
+	 * @param {function} backend Any function that returns a promise to a Buffer of an image
+	 * @param {object} options Options for Imagemin and for this route.
+	 * @param {function[]} options.plugins Imagemin plugins, in an array.
+	 * @param {boolean} options.guessFormat Whether this route should attempt to guess the format of an image if not already set.
+	 */
 	constructor(backend, options) {
 		if( !backend || typeof backend !== 'function' ) {
 			throw new Error('First argument must be a backend function!')
@@ -25,6 +40,17 @@ class ImageminProxy {
 		return this.route.bind(this)
 	}
 
+	/**
+	 * The actual Express middleware.
+	 * Runs the backend, then takes the response and minifies it according to:
+	 * query parameters specifying reformat
+	 * query parameters specifying resize
+	 * minifying plugins
+	 * content-type and file-type guessing
+	 * @param  {ExpressRequest}   req  Express request
+	 * @param  {ExpressResponse}   res  Express response
+	 * @param  {Function} next next function to pass to the next middleware
+	 */
 	route(req, res, next) {
 		this.backend(req, res)
 			.then(buffer => {
