@@ -1,5 +1,8 @@
 language: node_js
 cache: yarn
+before_install:
+- sudo apt-get install -y graphicsmagick
+
 node_js:
   - "node"
   - "lts/*"
