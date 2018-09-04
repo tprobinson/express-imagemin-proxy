@@ -1,6 +1,6 @@
 {
   "name": "express-imagemin-proxy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An express middleware to optimize images from a backend, with resizing and converting",
   "main": "src/index.js",
   "keywords": [

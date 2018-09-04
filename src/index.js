@@ -1,12 +1,12 @@
 const imagemin = require('imagemin')
 const ImageminGm = require('imagemin-gm')
-const imageminGm = new ImageminGm()
 const mime = require('mime/lite')
 // require('file-type') happens later down
 
 const defaultOptions = {
 	plugins: [],
 	guessFormat: true,
+	graphicsmagickPath: undefined,
 }
 
 /**
@@ -36,6 +36,8 @@ class ImageminProxy {
 			this.fileType = require('file-type')
 		}
 
+		this.imageminGm = new ImageminGm(this.options.graphicsmagickPath)
+
 		this.backend = backend
 		return this.route.bind(this)
 	}
@@ -62,11 +64,11 @@ class ImageminProxy {
 				if( 'height' in req.query && req.query.height ) { resizeConfig.height = req.query.height }
 				if( 'gravity' in req.query && req.query.gravity ) { resizeConfig.gravity = req.query.gravity }
 				if( Object.keys(resizeConfig).length > 0 ) {
-					prependPlugins.push(imageminGm.resize(resizeConfig))
+					prependPlugins.push(this.imageminGm.resize(resizeConfig))
 				}
 
 				if( 'format' in req.query && req.query.format ) {
-					prependPlugins.push(imageminGm.convert(req.query.format))
+					prependPlugins.push(this.imageminGm.convert(req.query.format))
 				}
 
 				return imagemin.buffer(buffer, {

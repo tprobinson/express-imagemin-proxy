@@ -105,6 +105,11 @@ If this is true and the backend has not set `Content-Type` headers (or they are 
 
 This is a useful option if you're not always certain what you're going to get, or for some reason the backend can't get file extensions on its own.
 
+### graphicsmagickPath
+
+Default: `undefined`
+
+If GraphicsMagick is not in your `$PATH`, you will get an error like `Stream yields empty buffer` when attempting to resize or convert images. You can specify a directory containing the Graphicsmagick binaries (not the binary itself) here. See [imagemin-gm](https://www.npmjs.com/package/imagemin-gm) for more information.
 
 # Query Parameters
 
