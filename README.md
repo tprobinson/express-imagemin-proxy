@@ -111,6 +111,16 @@ Default: `undefined`
 
 If GraphicsMagick is not in your `$PATH`, you will get an error like `Stream yields empty buffer` when attempting to resize or convert images. You can specify a directory containing the Graphicsmagick binaries (not the binary itself) here. See [imagemin-gm](https://www.npmjs.com/package/imagemin-gm) for more information.
 
+### handleBlankResponse
+
+Default: `404`
+
+If this is a non-false value and the backend gives an empty response, send this HTTP code.
+
+If this is a false value, throw a `EmptyResponseError` instead.
+
+`EmptyResponseError` can be accessed at `imageminProxy.errors.EmptyResponseError` for type checking if desired.
+
 # Query Parameters
 
 If this route receives certain query parameters, it will pass those along to Imagemin.

@@ -7,6 +7,17 @@ const defaultOptions = {
 	plugins: [],
 	guessFormat: true,
 	graphicsmagickPath: undefined,
+	handleBlankResponse: 404,
+}
+
+/**
+ * Error thrown when the backend gives us a blank response
+ * @extends Error
+ */
+class EmptyResponseError extends Error {}
+
+const errors = {
+	EmptyResponseError,
 }
 
 /**
@@ -30,6 +41,8 @@ class ImageminProxy {
 			throw new Error('First argument must be a backend function!')
 		}
 
+		this.errors = errors
+
 		this.options = Object.assign({}, defaultOptions, options)
 		if( this.options.guessFormat ) {
 			// This is an optional dependency, so don't initialize it unless we need it.
@@ -52,10 +65,23 @@ class ImageminProxy {
 	 * @param  {ExpressRequest}   req  Express request
 	 * @param  {ExpressResponse}   res  Express response
 	 * @param  {Function} next next function to pass to the next middleware
+	 * @throws {EmptyResponseError}
 	 */
 	route(req, res, next) {
 		this.backend(req, res)
 			.then(buffer => {
+				if( !buffer ) {
+					// We got a blank response, if we're supposed to handle it then do so
+					if( this.options.handleBlankResponse ) {
+						res.status(this.options.handleBlankResponse).end()
+						next()
+						return
+					}
+
+					// Otherwise throw.
+					throw new errors.EmptyResponseError()
+				}
+
 				// Use the query parameters to initialize some image resizing plugins
 				const prependPlugins = []
 
@@ -76,6 +102,8 @@ class ImageminProxy {
 				})
 			})
 			.then(buf => {
+				if( res.headersSent ) { return }
+
 				// Try to guess the content-type if it hasn't been set.
 				if( !('content-type' in res._headers) || res._headers['content-type'] === 'application/octet-stream' ) {
 					if( 'format' in req.query && req.query.format ) {
