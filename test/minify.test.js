@@ -2,83 +2,58 @@ const utils = require('./utils')
 const images = require('./images')
 
 describe('minify images', () => {
-	test('get minified gif', done => {
-		utils.createTestEnvironment(utils.serveBuffer(images.smallGif), {
-			plugins: utils.imageminPlugins,
-		}, (err, env) => {
-			if( err ) { return done(err) }
+  test('get minified gif', async () => {
+    const env = await utils.createTestEnvironment(utils.serveBuffer(images.smallGif), {
+      plugins: utils.imageminPlugins,
+    })
 
-			utils.getAsBinary(env.app)
-				.then(response => {
-					expect(response.statusCode).toBe(200)
-					expect(response.body.length).toBeLessThan(images.smallGif.length)
-					env.listen.close()
-					done()
-				})
-		})
-	})
+    const response = await utils.getAsBinary(env.app)
+    expect(response.statusCode).toBe(200)
+    expect(response.body.length).toBeLessThan(images.smallGif.length)
+    env.listen.close()
+  })
 
-	test('get minified jpeg', done => {
-		utils.createTestEnvironment(utils.serveBuffer(images.smallJpg), {
-			plugins: utils.imageminPlugins,
-		}, (err, env) => {
-			if( err ) { return done(err) }
-			utils.getAsBinary(env.app)
-				.then(response => {
-					expect(response.statusCode).toBe(200)
-					expect(response.body.length).toBeLessThan(images.smallJpg.length)
-					env.listen.close()
-					done()
-				})
-		})
-	})
+  test('get minified jpeg', async () => {
+    const env = await utils.createTestEnvironment(utils.serveBuffer(images.smallJpg), {
+      plugins: utils.imageminPlugins,
+    })
+    const response = await utils.getAsBinary(env.app)
+    expect(response.statusCode).toBe(200)
+    expect(response.body.length).toBeLessThan(images.smallJpg.length)
+    env.listen.close()
+  })
 
-	test('get minified png', done => {
-		utils.createTestEnvironment(utils.serveBuffer(images.smallPng), {
-			plugins: utils.imageminPlugins,
-		}, (err, env) => {
-			if( err ) { return done(err) }
+  test('get minified png', async () => {
+    const env = await utils.createTestEnvironment(utils.serveBuffer(images.smallPng), {
+      plugins: utils.imageminPlugins,
+    })
 
-			utils.getAsBinary(env.app)
-				.then(response => {
-					expect(response.statusCode).toBe(200)
-					expect(response.body.length).toBeLessThan(images.smallPng.length)
-					env.listen.close()
-					done()
-				})
-		})
-	})
+    const response = await utils.getAsBinary(env.app)
+    expect(response.statusCode).toBe(200)
+    expect(response.body.length).toBeLessThan(images.smallPng.length)
+    env.listen.close()
+  })
 
-	// Waiting for https://github.com/sindresorhus/is-svg/pull/18
-	test.skip('get minified svg', done => {
-		utils.createTestEnvironment(utils.serveBuffer(images.smallSvg), {
-			plugins: utils.imageminPlugins,
-		}, (err, env) => {
-			if( err ) { return done(err) }
+  // Waiting for https://github.com/sindresorhus/is-svg/pull/18
+  test.skip('get minified svg', async () => {
+    const env = await utils.createTestEnvironment(utils.serveBuffer(images.smallSvg), {
+      plugins: utils.imageminPlugins,
+    })
 
-			utils.getAsBinary(env.app)
-				.then(response => {
-					expect(response.statusCode).toBe(200)
-					expect(response.body.length).toBeLessThan(images.smallSvg.length)
-					env.listen.close()
-					done()
-				})
-		})
-	})
+    const response = await utils.getAsBinary(env.app)
+    expect(response.statusCode).toBe(200)
+    expect(response.body.length).toBeLessThan(images.smallSvg.length)
+    env.listen.close()
+  })
 
-	test('get minified png with content-type preset', done => {
-		utils.createTestEnvironment(utils.serveBufferWithContentType(images.smallPng, 'image/png'), {
-			plugins: utils.imageminPlugins,
-		}, (err, env) => {
-			if( err ) { return done(err) }
+  test('get minified png with content-type preset', async () => {
+    const env = await utils.createTestEnvironment(utils.serveBufferWithContentType(images.smallPng, 'image/png'), {
+      plugins: utils.imageminPlugins,
+    })
 
-			utils.getAsBinary(env.app)
-				.then(response => {
-					expect(response.statusCode).toBe(200)
-					expect(response.body.length).toBeLessThan(images.smallPng.length)
-					env.listen.close()
-					done()
-				})
-		})
-	})
+    const response = await utils.getAsBinary(env.app)
+    expect(response.statusCode).toBe(200)
+    expect(response.body.length).toBeLessThan(images.smallPng.length)
+    env.listen.close()
+  })
 })

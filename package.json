@@ -1,6 +1,6 @@
 {
   "name": "express-imagemin-proxy",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "An express middleware to optimize images from a backend, with resizing and converting",
   "main": "src/index.js",
   "keywords": [
@@ -26,7 +26,7 @@
   },
   "scripts": {
     "lint": "eslint src/ test/ __mocks__/",
-    "test": "yarn run lint; jest --maxWorkers=4",
+    "test": "yarn run lint && jest --maxWorkers=4",
     "test:coveralls": "yarn run test --coverage --coverageReporters=text-lcov | yarn exec coveralls",
     "doc": "esdoc",
     "docdev": "esdoc && serve -s docs"
@@ -57,7 +57,7 @@
     "supertest": "^3.1.0"
   },
   "dependencies": {
-    "imagemin": "^6.0.0",
+    "imagemin": "^6.1.0",
     "imagemin-gm": "^2.0.0",
     "mime": "^2.3.1",
     "node-fetch": "^2.2.0"
