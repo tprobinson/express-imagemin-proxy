@@ -29,7 +29,9 @@
     "test": "yarn run lint && jest --maxWorkers=4",
     "test:coveralls": "yarn run test --coverage --coverageReporters=text-lcov | yarn exec coveralls",
     "doc": "esdoc",
-    "docdev": "esdoc && serve -s docs"
+    "docdev": "esdoc && serve -s docs",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "jest": {
     "testEnvironment": "node",
@@ -60,9 +62,11 @@
     "imagemin": "^6.1.0",
     "imagemin-gm": "^2.0.0",
     "mime": "^2.3.1",
-    "node-fetch": "^2.2.0"
+    "node-fetch": "^2.2.0",
+    "snyk": "^1.230.5"
   },
   "optionalDependencies": {
     "file-type": "^9.0.0"
-  }
+  },
+  "snyk": true
 }
