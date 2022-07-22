@@ -63,6 +63,6 @@
     "node-fetch": "^2.2.0"
   },
   "optionalDependencies": {
-    "file-type": "^9.0.0"
+    "file-type": "^16.5.4"
   }
 }
